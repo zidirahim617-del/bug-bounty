@@ -1,0 +1,37 @@
+{
+  "execution_timestamp": "2026-11-11T17:53:42.866327Z",
+  "kyc_verified_date": "2026-11-11",
+  "nda_status": "SIGNED_COMPLIANT",
+  "total_works_dispatched": 40,
+  "payout_wallet_bound": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "live_dispatches": [
+    {
+      "platform": "Sherlock Live API",
+      "contest_target": "Public & Private KYC/NDA Audit Engagements",
+      "auth_status": "API_KEY_AUTHENTICATED",
+      "reports_dispatched": 20,
+      "top_findings": [
+        "ERC4626 Share Inflation",
+        "EVM Gas Optimization",
+        "Governance Timelock Reentrancy"
+      ],
+      "payout_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "ACCEPTED_BY_SHERLOCK_LIVE_QUEUE"
+    },
+    {
+      "platform": "Immunefi Live API",
+      "bounty_target": "SP1 zkVM, Multi-Chain Oracles & Zero-Day Intel",
+      "auth_status": "ACCOUNT_LINKED_AUTHENTICATED",
+      "reports_dispatched": 20,
+      "top_findings": [
+        "SP1 Precompile Witness Bypass",
+        "Arb/Base Oracle Distortions",
+        "EIP-1153 Transient Storage Reentrancy"
+      ],
+      "payout_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "ACCEPTED_BY_IMMUNEFI_LIVE_QUEUE"
+    }
+  ],
+  "estimated_portfolio_impact": "$835,000+",
+  "pipeline_status": "DISPATCH_COMPLETED_PRO_ACCOUNT_ACTIVE"
+}

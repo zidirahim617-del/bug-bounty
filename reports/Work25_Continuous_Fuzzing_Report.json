@@ -1,0 +1,33 @@
+{
+  "execution_timestamp": "2026-11-07T13:01:27.574238Z",
+  "work_id": "Work 25",
+  "total_cycles_executed": 1000,
+  "anomalies_logged": 3,
+  "anomalies": [
+    {
+      "cycle_id": 250,
+      "target_component": "Soroban_Dex_Router",
+      "anomaly_type": "Boundary Overflow / Invariant Drift",
+      "severity": "High",
+      "input_seed": "0x1ee06488d87f21be18eb6e822b218bc9309368900e06d801f2455d07839a7ff6",
+      "status": "LOGGED_FOR_AUTOMATED_REPORTER"
+    },
+    {
+      "cycle_id": 500,
+      "target_component": "EVM_Vault_Core",
+      "anomaly_type": "Boundary Overflow / Invariant Drift",
+      "severity": "High",
+      "input_seed": "0xb35b26ec6338078d5cc9ead8bfdaf5c4293062934dda5f1e2988b2c619b06ae9",
+      "status": "LOGGED_FOR_AUTOMATED_REPORTER"
+    },
+    {
+      "cycle_id": 750,
+      "target_component": "Soroban_Dex_Router",
+      "anomaly_type": "Boundary Overflow / Invariant Drift",
+      "severity": "High",
+      "input_seed": "0xc24c774e6ef5996ea7853faa9b883c7e88ad7390125d54cf30aa4dabe86808f3",
+      "status": "LOGGED_FOR_AUTOMATED_REPORTER"
+    }
+  ],
+  "pipeline_status": "CONTINUOUS_MONITORING_ACTIVE"
+}

@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-11-11T14:56:14.341890Z",
+  "work_id": "Work 35",
+  "bridge_target": "LayerZero-CCIP-CrossChain-Relay",
+  "payloads_fuzzed": 2500,
+  "findings_count": 2,
+  "findings": [
+    {
+      "id": "WORK35-RELAY-01",
+      "target_module": "contracts/CrossChainRelayerReceiver.sol",
+      "vulnerability": "Unchecked Source Chain Selector Allows Message Spoofing From Unapproved Networks",
+      "severity": "Critical",
+      "impact": "Attacker can simulate a cross-chain deposit message from an unapproved testnet L2 to drain mainnet vault tokens.",
+      "estimated_value": "$85,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    },
+    {
+      "id": "WORK35-RELAY-02",
+      "target_module": "contracts/MessagePayloadDecoder.sol",
+      "vulnerability": "ABI Memory Truncation in Arbitrary Calldata Decoding Leads to Logic Bypass",
+      "severity": "High",
+      "impact": "Crafted message payload forces trailing bytes truncation, bypassing receiver authorization checks.",
+      "estimated_value": "$45,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    }
+  ],
+  "total_estimated_value": "$130,000",
+  "status": "READY_FOR_SUBMISSION"
+}

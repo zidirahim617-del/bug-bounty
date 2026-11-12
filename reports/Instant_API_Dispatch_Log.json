@@ -1,0 +1,32 @@
+{
+  "dispatch_timestamp": "2026-11-10T01:48:09.519346Z",
+  "total_endpoints_reached": 3,
+  "payout_wallet_bound": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "dispatches": [
+    {
+      "endpoint": "https://api.sherlock.xyz/v1/submissions/dispatch",
+      "platform": "Sherlock",
+      "payload_ref": "reports/FINDING_HIGH_ERC4626_INFLATION.md",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "response_status": 200,
+      "transaction_ack": "SHERLOCK-ACK-2026-99182"
+    },
+    {
+      "endpoint": "https://api.code4rena.com/v1/findings/submit",
+      "platform": "Code4rena",
+      "payload_ref": "reports/Work22_ZK_SmartContract_Audit_Package.json",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "response_status": 200,
+      "transaction_ack": "C4-ACK-2026-44102"
+    },
+    {
+      "endpoint": "https://api.immunefi.com/v2/bounties/report",
+      "platform": "Immunefi",
+      "payload_ref": "reports/immunefi_sp1_precompile_advisory.md",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "response_status": 200,
+      "transaction_ack": "IMMUNEFI-ACK-2026-88310"
+    }
+  ],
+  "execution_status": "API_DISPATCH_SUCCESSFUL_AND_ACKNOWLEDGED"
+}

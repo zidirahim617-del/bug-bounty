@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-11-08T17:15:41.692216Z",
+  "work_id": "Work 28",
+  "pool_target": "AMM-Constant-Product-Pool-v3",
+  "swaps_simulated": 1000,
+  "findings_count": 2,
+  "findings": [
+    {
+      "id": "WORK28-MEV-01",
+      "target_module": "contracts/AMMConstantProductPool.sol",
+      "vulnerability": "Slippage Protection Bypass via Rounding Error in Minimum Amount Output",
+      "severity": "High",
+      "impact": "Sandwich attackers can force 100% slippage on large swaps without reverting.",
+      "estimated_value": "$25,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    },
+    {
+      "id": "WORK28-AMM-02",
+      "target_module": "contracts/TWAPOracleAdapter.sol",
+      "vulnerability": "Single-Block Liquidity Flash Injection Distorts Cumulative Price",
+      "severity": "Critical",
+      "impact": "Flash loan borrower can artificially inflate oracle price to liquidate collateralized loans.",
+      "estimated_value": "$40,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    }
+  ],
+  "total_estimated_value": "$65,000",
+  "status": "READY_FOR_SUBMISSION"
+}

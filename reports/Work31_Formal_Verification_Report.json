@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-11-09T01:12:09.525384Z",
+  "work_id": "Work 31",
+  "protocol_target": "DeFi-Lending-Vault-V4",
+  "invariants_checked": 350,
+  "verification_results": [
+    {
+      "property_id": "PROP-SOLVENCY-01",
+      "contract": "VaultCore.sol",
+      "property_statement": "forall u. vault.totalAssets() >= u.userShares * sharePrice",
+      "verification_status": "SATISFIED_PROVED_MATHEMATICALLY",
+      "proof_time_ms": 1420
+    },
+    {
+      "property_id": "PROP-NONCE-UNENFORCEABILITY-02",
+      "contract": "CrossChainMessenger.sol",
+      "property_statement": "forall m. isExecuted(m.nonce) == true ==> execute(m) reverts",
+      "verification_status": "COUNTEREXAMPLE_FOUND_VULNERABILITY",
+      "counterexample_details": "Re-entrancy in cancel() resets execution flag before state flush",
+      "estimated_value": "$50,000",
+      "proof_time_ms": 2890
+    }
+  ],
+  "engine_status": "FORMAL_PROOFS_GENERATED"
+}

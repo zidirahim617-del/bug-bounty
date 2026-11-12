@@ -1,0 +1,28 @@
+{
+  "dispatch_timestamp": "2026-11-07T12:55:24.205513Z",
+  "wallet_bound": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "active_dispatches": [
+    {
+      "target_platform": "Sherlock",
+      "contest": "Active-DeFi-Vault-Contest-Nov2026",
+      "payload_file": "reports/FINDING_HIGH_ERC4626_INFLATION.md",
+      "payout_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    },
+    {
+      "target_platform": "Code4rena",
+      "contest": "Active-ZK-Bridge-Contest-Nov2026",
+      "payload_file": "reports/Work22_ZK_SmartContract_Audit_Package.json",
+      "payout_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    },
+    {
+      "target_platform": "Immunefi",
+      "bounty_program": "SP1-zkVM-Precompile-Program",
+      "payload_file": "reports/immunefi_sp1_precompile_advisory.md",
+      "payout_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    }
+  ],
+  "status": "READY_FOR_DIRECT_PLATFORM_SUBMISSION"
+}

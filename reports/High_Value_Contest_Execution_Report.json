@@ -1,0 +1,25 @@
+{
+  "execution_timestamp": "2026-11-06T15:33:42.998604Z",
+  "platform": "Sherlock / Code4rena",
+  "findings_generated": 2,
+  "total_estimated_value": "$47,000",
+  "findings": [
+    {
+      "id": "SHERLOCK-H-01",
+      "title": "Unchecked Zero-Address Transfer in Vault Shares Redemption",
+      "severity": "High",
+      "impact": "Users can permanently burn shares without receiving underlying assets due to missing recipient validation.",
+      "poc_snippet": "require(to != address(0), 'Zero address');",
+      "estimated_bounty_value": "$12,000"
+    },
+    {
+      "id": "SHERLOCK-C-01",
+      "title": "First Depositor ERC4626 Inflation Exploit via Direct Asset Transfer",
+      "severity": "Critical",
+      "impact": "Attacker can manipulate share price ratio and steal subsequent depositor funds.",
+      "poc_snippet": "vault.deposit(1); dai.transfer(address(vault), 10e18);",
+      "estimated_bounty_value": "$35,000"
+    }
+  ],
+  "status": "SUBMISSION_READY"
+}

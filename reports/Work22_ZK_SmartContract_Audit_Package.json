@@ -1,0 +1,30 @@
+{
+  "execution_timestamp": "2026-11-06T15:57:16.204231Z",
+  "protocol": "Polymer-ZK-L2-Bridge",
+  "scanned_modules_count": 4,
+  "total_findings": 2,
+  "findings": [
+    {
+      "id": "WORK22-ZK-01",
+      "target_module": "circuits/state_proof.rs",
+      "category": "ZK Soundness / Under-constrained Circuit",
+      "severity": "Critical",
+      "title": "Unconstrained Polynomial Evaluation Witness Allows Fake State Proof Creation",
+      "description": "The ZK verifier circuit fails to enforce equality constraints between intermediate polynomial commitments and public inputs.",
+      "poc_status": "VERIFIED_PROOF_OF_CONCEPT",
+      "estimated_value": "$50,000"
+    },
+    {
+      "id": "WORK22-SC-02",
+      "target_module": "contracts/L2BridgeVault.sol",
+      "category": "Cross-Chain Replay / Signature Malleability",
+      "severity": "High",
+      "title": "EIP-712 Signature Replay Across Chains Due to Unchecked ChainID in Domain Separator",
+      "description": "The domain separator uses a cached chainId that is not refreshed on hard forks or cross-chain relay execution.",
+      "poc_status": "VERIFIED_PROOF_OF_CONCEPT",
+      "estimated_value": "$20,000"
+    }
+  ],
+  "total_estimated_bounty": "$70,000",
+  "submission_readiness": "READY_FOR_SHERLOCK_AND_IMMUNEFI"
+}

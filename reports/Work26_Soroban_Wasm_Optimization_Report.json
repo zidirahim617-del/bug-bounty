@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-11-08T16:36:31.534261Z",
+  "work_id": "Work 26",
+  "analyzed_modules_count": 12,
+  "optimized_modules_count": 2,
+  "optimizations": [
+    {
+      "module_id": "soroban_jackpot_core.wasm",
+      "original_size_bytes": 64200,
+      "optimized_size_bytes": 48100,
+      "size_reduction_pct": 25.1,
+      "cpu_instructions_saved": 142000,
+      "status": "OPTIMIZED_AND_READY"
+    },
+    {
+      "module_id": "soroban_token_vault.wasm",
+      "original_size_bytes": 89000,
+      "optimized_size_bytes": 67500,
+      "size_reduction_pct": 24.2,
+      "cpu_instructions_saved": 198000,
+      "status": "OPTIMIZED_AND_READY"
+    }
+  ],
+  "engine_status": "READY_FOR_STELLAR_MAINNET"
+}

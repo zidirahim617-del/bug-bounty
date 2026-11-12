@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-11-08T17:15:41.621256Z",
+  "total_dispatches": 3,
+  "dispatches": [
+    {
+      "platform": "Sherlock",
+      "contest_target": "DeFi Vault & Yield Protocol",
+      "finding_title": "First Deposit ERC4626 Inflation Attack Allows Vault Share Theft",
+      "report_file": "reports/FINDING_HIGH_ERC4626_INFLATION.md",
+      "payout_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "READY_FOR_DIRECT_SUBMISSION"
+    },
+    {
+      "platform": "Code4rena",
+      "contest_target": "ZK Rollup & Cross-Chain Bridge",
+      "finding_title": "Unconstrained Polynomial Witness Evaluation in ZK Verifier Circuit",
+      "report_file": "reports/Work22_ZK_SmartContract_Audit_Package.json",
+      "payout_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "READY_FOR_DIRECT_SUBMISSION"
+    },
+    {
+      "platform": "Immunefi",
+      "bounty_target": "SP1 zkVM Precompile Circuits",
+      "finding_title": "Division-by-Zero and Field Boundary Witness Bypass in Precompiles",
+      "report_file": "reports/immunefi_sp1_precompile_advisory.md",
+      "payout_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+      "status": "READY_FOR_DIRECT_SUBMISSION"
+    }
+  ],
+  "wallet_destination": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "submission_status": "COMPILED_AND_READY_FOR_LIVE_CONTESTS"
+}

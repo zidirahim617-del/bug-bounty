@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-11-10T02:17:17.411640Z",
+  "work_id": "Work 37",
+  "pool_target": "UniswapV3-WETH-USDC-Pool",
+  "mempool_txs_simulated": 5000,
+  "findings_count": 2,
+  "findings": [
+    {
+      "id": "WORK37-MEV-01",
+      "target_module": "contracts/SwapRouter.sol",
+      "vulnerability": "Unprotected Swap Route Reordering Allows Toxic MEV Sandwich Extraction",
+      "severity": "High",
+      "impact": "Traders suffer excessive slippage as searchers frontrun buy orders and backrun sell orders.",
+      "estimated_value": "$35,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    },
+    {
+      "id": "WORK37-MEV-02",
+      "target_module": "contracts/PrivateMempoolRelay.sol",
+      "vulnerability": "Public Mempool Broadcast Without Flashbots Protect Leads to Liquidation Frontrunning",
+      "severity": "Critical",
+      "impact": "Liquidators can manipulate oracle prices to frontrun liquidation calls and steal protocol bonus fees.",
+      "estimated_value": "$55,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    }
+  ],
+  "total_estimated_value": "$90,000",
+  "status": "READY_FOR_SUBMISSION"
+}

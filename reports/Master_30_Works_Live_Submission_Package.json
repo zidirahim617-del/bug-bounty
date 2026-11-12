@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-11-08T17:38:32.521942Z",
+  "total_works_completed": 30,
+  "payout_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "supported_chains": [
+    "Base",
+    "Ethereum Mainnet",
+    "Arbitrum One"
+  ],
+  "token_symbol": "USDC",
+  "active_contest_dispatches": [
+    {
+      "platform": "Sherlock",
+      "contest": "Active-DeFi-Vault-Contest-Nov2026",
+      "findings_included": [
+        "ERC4626 Inflation",
+        "Work 28 AMM Slippage",
+        "Work 29 Governance Timelock"
+      ],
+      "total_estimated_value": "$105,000",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    },
+    {
+      "platform": "Code4rena",
+      "contest": "Active-ZK-Bridge-Contest-Nov2026",
+      "findings_included": [
+        "Work 22 ZK Witness",
+        "Work 24 Cross-Chain Replay",
+        "Work 30 ZK Constraint Overwrite"
+      ],
+      "total_estimated_value": "$165,000",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    },
+    {
+      "platform": "Immunefi",
+      "bounty_program": "SP1-zkVM-Precompile-Program",
+      "findings_included": [
+        "SP1 Precompile Soundness",
+        "Field Modulus Wraparound"
+      ],
+      "total_estimated_value": "$50,000",
+      "status": "DISPATCH_PACKAGED_AND_BOUND"
+    }
+  ],
+  "grand_total_estimated_value": "$320,000",
+  "dispatch_status": "READY_FOR_INSTANT_LIVE_SUBMISSION"
+}

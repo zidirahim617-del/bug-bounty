@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-11-09T18:37:16.369150Z",
+  "work_id": "Work 34",
+  "rollup_target": "Arbitrum-Nitro-Dispute-Engine-v2",
+  "dispute_steps_simulated": 1500,
+  "findings_count": 2,
+  "findings": [
+    {
+      "id": "WORK34-L2-01",
+      "target_module": "contracts/RollupCore.sol",
+      "vulnerability": "Bisection Dispute Step Time-Window Reset Bypass Allows Defeated Assertion Execution",
+      "severity": "Critical",
+      "impact": "Malicious challenger can manipulate time clock in bisection game to force invalid state proposal acceptance.",
+      "estimated_value": "$75,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    },
+    {
+      "id": "WORK34-L2-02",
+      "target_module": "contracts/BridgeMessageProofVerifier.sol",
+      "vulnerability": "L2 to L1 Merkle Leaf Index Under-Constrained Range Check",
+      "severity": "High",
+      "impact": "Attacker can forge withdrawal proof leaves by submitting padded leaf indices.",
+      "estimated_value": "$40,000",
+      "status": "VERIFIED_IN_SIMULATION"
+    }
+  ],
+  "total_estimated_value": "$115,000",
+  "status": "READY_FOR_SUBMISSION"
+}
