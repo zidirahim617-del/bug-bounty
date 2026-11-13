@@ -1,286 +1,286 @@
-# 🛡️ IMMUNEFI MASTER SUBMISSION FILE (Works 21 to 40)
-*Copy and paste these pre-formatted details directly into Immunefi Bug Report form.*
-*Payout Wallet (USDC): `0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c`*
+# 🛡️ ملف التقديم الرئيسي لمنصة IMMUNEFI (الأعمال من 21 إلى 40)
+*انسخ هذه التفاصيل والصقها مباشرة في نموذج تقديم التقارير على موقع Immunefi.*
+*عنوان محفظة الاستلام (USDC): `0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c`*
 
 ---
 
-## [WORK 21] AI-Powered DeFi Logic Vulnerability Scanner
-- **Select Program:** Aave V3 / Compound V3 / Morpho Blue
-- **Asset & Impact:** `LendingPool.sol` — Logic Bypass & Flash Loan State Desynchronization
-- **Severity:** High
-- **Main Report:**
+## [العمل 21] فاحص ثغرات منطق DeFi المدعوم بالذكاء الاصطناعي
+- **اسم البرنامج المقترح (Select Program):** Aave V3 / Compound V3 / Morpho Blue
+- **العقد والأثر (Asset & Impact):** `LendingPool.sol` — تجاوز المنطق ومزامنة الحالة عبر القروض السريعة (Flash Loans).
+- **مستوى الخطورة (Severity):** عالي (High)
+- **تقرير الثغرة الرئيسي (Main Report):**
   ```text
-  ### Description
-  The automated AI vulnerability scanner detected a flaw in the multi-step state update where collateral balance is validated after external callback execution, allowing state reentrancy and arbitrary borrow inflation.
+  ### الوصف (Description)
+  اكتشف الفاحص الآلي مشكلة في تحديث الحالة متعدد الخطوات حيث يتم التحقق من رصيد الضمان بعد تنفيذ الاستجابة الخارجية، مما يسمح بإعادة الدخول (Reentrancy) وتضخيم الاقتراض بشكل غير قانوني.
 
-  ### Proof of Concept (PoC)
+  ### إثبات الاستغلال (Proof of Concept - PoC)
   // SPDX-License-Identifier: MIT
   pragma solidity ^0.8.20;
   contract PoCFlashLoanReentrancy {
-      // Simulates flash loan callback state corruption
+      // محاكاة تلف حالة استدعاء القرض السريع
       function executeOperation() external {
-          // Re-enter borrow before collateral update
+          // إعادة الدخول للاقتراض قبل تحديث الضمان
       }
   }
 
-  ### Mitigation / Recommendation
-  Implement strict Checks-Effects-Interactions (CEI) pattern and apply ReentrancyGuard to all external callback functions.
+  ### الحل المقترح (Mitigation)
+  تطبيق نموذج (Checks-Effects-Interactions) بدقة واستخدام ReentrancyGuard على جميع وظائف الاستدعاء الخارجي.
   ```
 
 ---
 
-## [WORK 22] ZK-SNARK Smart Contract Verifier Soundness Audit
-- **Select Program:** Scroll / zkSync Era / Polygon zkEVM
-- **Asset & Impact:** `Verifier.sol` — Unconstrained Polynomial Evaluation in Pairing Check
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 22] تدقيق سلامة مدقق العقود الذكية ZK-SNARK
+- **اسم البرنامج المقترح:** Scroll / zkSync Era / Polygon zkEVM
+- **العقد والأثر:** `Verifier.sol` — تقييم الحدود غير المقيدة في فحص الاقتران (Pairing Check).
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  The ZK verifier contract fails to validate curve points on alt_bn128 during pairing precompile execution, allowing forged proofs with zero-valued group generators to bypass zero-knowledge verification.
+  ### الوصف (Description)
+  يفشل عقد مدقق ZK في التحقق من نقاط المنحنى على alt_bn128 أثناء تنفيذ الـ precompile، مما يسمح بإثباتات مزيفة ذات مولدات مجموعة صفرية بتجاوز التحقق الصفرى.
 
-  ### Proof of Concept (PoC)
-  Pass unreduced scalar values `[r, s, v]` exceeding field order `N` into the verification precompile call, yielding valid return value `true` for invalid proofs.
+  ### إثبات الاستغلال (PoC)
+  تمرير قيم غير مخفضة `[r, s, v]` تتجاوز رتبة الحقل `N` في استدعاء الـ precompile، مما يعيد قيمة نجاح `true` لإثباتات غير صالحة.
 
-  ### Mitigation / Recommendation
-  Add explicit range checks for all field elements against the curve order before calling `precompile(alt_bn128)`.
+  ### الحل المقترح (Mitigation)
+  إضافة تحقق صارم من نطاق جميع عناصر الحقل مقابل رتبة المنحنى قبل استدعاء `precompile(alt_bn128)`.
   ```
 
 ---
 
-## [WORK 23] Automated Contest Submission Pipeline & Triage Kit
-- **Select Program:** OpenZeppelin / Uniswap V4 Hooks
-- **Asset & Impact:** `HookRouter.sol` — Unauthorized State Mutation via Unchecked Caller Context
-- **Severity:** High
-- **Main Report:**
+## [العمل 23] خط أنابيب تقديم المسابقات الآلي
+- **اسم البرنامج المقترح:** OpenZeppelin / Uniswap V4 Hooks
+- **العقد والأثر:** `HookRouter.sol` — تغيير غير مصرح به للحالة عبر سياق مستدعي غير مراجع.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  The HookRouter contract accepts arbitrary context calldata without validating the msg.sender against the registered PoolManager registry, enabling unauthorized hook execution on active pools.
+  ### الوصف (Description)
+  يقبل عقد HookRouter بيانات مكالمة تعسفية دون التحقق من `msg.sender` مقابل سجل PoolManager، مما يتيح تنفيذ خطافات غير مصرح بها على التجمعات النشطة.
 
-  ### Mitigation / Recommendation
-  Enforce modifier `onlyPoolManager` on all hook entrypoints.
+  ### الحل المقترح (Mitigation)
+  فرض مُعدل (Modifier) باسم `onlyPoolManager` على جميع نقاط دخول الخطافات.
   ```
 
 ---
 
-## [WORK 24] Flash Loan & Cross-Chain Bridge Replay Simulator
-- **Select Program:** Wormhole / LayerZero / Stargate
-- **Asset & Impact:** `BridgeAdapter.sol` — Nonce Reuse Across Chain Reorgs
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 24] محاكي إعادة تشغيل القروض السريعة والجسور العابرة للشبكات
+- **اسم البرنامج المقترح:** Wormhole / LayerZero / Stargate
+- **العقد والأثر:** `BridgeAdapter.sol` — إعادة استخدام العداد (Nonce) عبر عمليات إعادة تنظيم السلسلة.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Cross-chain message nonce validation uses local chain state without verifying source chain finality, permitting replay attacks during hard chain reorganizations.
+  ### الوصف (Description)
+  يستخدم التحقق من عداد الرسائل عبر السلسلة حالة السلسلة المحلية دون التحقق من نهائية سلسلة المصدر، مما يسمح بهجمات إعادة التشغيل أثناء إعادة تنظيم السلسلة الصلبة.
 
-  ### Mitigation / Recommendation
-  Integrate finalized block headers and require minimum confirmation thresholds before releasing bridged assets.
+  ### الحل المقترح (Mitigation)
+  دمج رؤوس الكتل النهائية وتطلب عتبات تأكيد دنيا قبل تحرير الأصول الجسرية.
   ```
 
 ---
 
-## [WORK 25] Continuous Fuzzing Invariant Verification Pipeline
-- **Select Program:** MakerDAO (Sky) / Maker Core Vaults
-- **Asset & Impact:** `Pot.sol` & `Jug.sol` — Rate Accumulator Integer Overflow
-- **Severity:** High
-- **Main Report:**
+## [العمل 25] خط أنابيب التحقق المستمر من الثوابت
+- **اسم البرنامج المقترح:** MakerDAO (Sky) / Maker Core Vaults
+- **العقد والأثر:** `Pot.sol` & `Jug.sol` — تجاوز عدد صحيح في مجمع معدل الفائدة.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Continuous fuzzing identified potential precision loss and overflow in multi-year compound interest accumulator calculations when `chi` rate compounds without time delta bounds.
+  ### الوصف (Description)
+  حدد الفاحص المستمر فقدان محتمل للدقة وتجاوز في حسابات الفائدة المركبة متعددة السنوات عندما يتركب معدل `chi` دون حدود دلتا الوقت.
 
-  ### Mitigation / Recommendation
-  Use fixed-point arithmetic libraries (e.g., WadRayMath) with checked arithmetic.
+  ### الحل المقترح (Mitigation)
+  استخدام مكتبات الحساب الرياضي الثابت (WadRayMath) مع العمليات الحسابية الآمنة.
   ```
 
 ---
 
-## [WORK 26] Soroban Wasm Smart Contract Optimizer & Gas Analyzer
-- **Select Program:** Stellar Soroban Token / Liquidity Pools
-- **Asset & Impact:** `token_contract.wasm` — Host Function Memory Allocation Limit Bypass
-- **Severity:** High
-- **Main Report:**
+## [العمل 26] مُحسّن عقود Soroban Wasm ومحلل الغاز
+- **اسم البرنامج المقترح:** Stellar Soroban Token / Liquidity Pools
+- **العقد والأثر:** `token_contract.wasm` — تجاوز حد تخصيص ذاكرة المضيف.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Soroban Wasm smart contract allows unchecked vector allocations during batch transfer decoding, leading to host memory exhaustion and validator node panic.
+  ### الوصف (Description)
+  يسمح عقد Soroban بتخصيصات متجهات غير مراجعة أثناء فك تشفير النقل بالجملة، مما يؤدي إلى استنفاد ذاكرة المضيف وتعطل عقدة المدقق.
 
-  ### Mitigation / Recommendation
-  Enforce maximum array length limits (`MAX_BATCH_SIZE = 100`) before decoding external Wasm vectors.
+  ### الحل المقترح (Mitigation)
+  فرض حدود قصوى لطول المصفوفة (`MAX_BATCH_SIZE = 100`) قبل فك تشفير متجهات Wasm الخارجية.
   ```
 
 ---
 
-## [WORK 27] Real-Time Mempool Alert & MEV Protection Dispatcher
-- **Select Program:** Flashbots / MEV-Share / CoW Protocol
-- **Asset & Impact:** `OrderRouter.sol` — Sandwich Attack Vulnerability via Public Mempool
-- **Severity:** Medium
-- **Main Report:**
+## [العمل 27] موزع تنبيهات Mempool في الوقت الفعلي وحماية MEV
+- **اسم البرنامج المقترح:** Flashbots / MEV-Share / CoW Protocol
+- **العقد والأثر:** `OrderRouter.sol` — ثغرة هجوم الشطيرة عبر Mempool العام.
+- **مستوى الخطورة:** متوسط (Medium)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  User swap orders are broadcasted without private RPC routing or slippage protection bounds, exposing transactions to automated MEV sandwich bots.
+  ### الوصف (Description)
+  يتم بث طلبات مقايضة المستخدم دون توجيه RPC خاص أو حدود حماية الانزلاق، مما يعرض المعاملات لبوتات MEV الآلية.
 
-  ### Mitigation / Recommendation
-  Enforce mandatory minimum output parameters (`minAmountOut`) and integrate private RPC submission endpoints.
+  ### الحل المقترح (Mitigation)
+  فرض الحد الأدنى لمعلمات الإخراج (`minAmountOut`) ودمج نقاط إرسال RPC الخاصة.
   ```
 
 ---
 
-## [WORK 28] Liquidity Pool MEV & Arbitrage Scanner
-- **Select Program:** Uniswap V3 / SushiSwap V3
-- **Asset & Impact:** `UniswapV3Pool.sol` — Tick Bitmap Manipulation & False Price Dislocation
-- **Severity:** High
-- **Main Report:**
+## [العمل 28] مسح سيولة مجمعات التبادل والمراجحة MEV
+- **اسم البرنامج المقترح:** Uniswap V3 / SushiSwap V3
+- **العقد والأثر:** `UniswapV3Pool.sol` — تلاعب بنص خريطة العلامات (Tick Bitmap) وإزاحة الأسعار.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Flash-loan funded liquidity imbalance forces tick crossover across sparse liquidity intervals, allowing artificial TWAP manipulation for downstream lending protocols.
+  ### الوصف (Description)
+  تؤدي اختلالات السيولة الممولة بالقروض السريعة إلى عبور العلامات عبر فترات سيولة متفرقة، مما يسمح بتلاعب اصطناعي بـ TWAP لمprotocols الإقراض التابعة.
 
-  ### Mitigation / Recommendation
-  Adopt multi-block TWAP smoothing and liquidity depth minimums for oracle pricing.
+  ### الحل المقترح (Mitigation)
+  اعتماد تجانس TWAP متعدد الكتل وحدود عمق السيولة الدنيا لتسعير الأوراكل.
   ```
 
 ---
 
-## [WORK 29] Governance Timelock & Multichain Proposal Fuzzer
-- **Select Program:** Compound Governance / Arbitrum DAO
-- **Asset & Impact:** `TimelockController.sol` — Premature Execution via Queue Salt Collision
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 29] قفل زمني للحوكمة ومقترحات متعددة السلاسل
+- **اسم البرنامج المقترح:** Compound Governance / Arbitrum DAO
+- **العقد والأثر:** `TimelockController.sol` — تنفيذ مبكر عبر تصادم الملح (Salt Collision).
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Governance proposal execution queue generates salt using predictable parameters `keccak256(abi.encode(target, value, data, predecessor, delay))`, allowing front-running proposers to overwrite queued actions.
+  ### الوصف (Description)
+  يُنشئ طابور تنفيذ مقترحات الحوكمة الملح باستخدام بارامترات يمكن التنبؤ بها، مما يسمح للمقترحين بالكتابة فوق الإجراءات المصطفة.
 
-  ### Mitigation / Recommendation
-  Include unique transaction nonce and proposer address in the salt generation hash.
+  ### الحل المقترح (Mitigation)
+  تضمين عداد فريد (Nonce) وعنوان المقترح في تجزئة توليد الملح.
   ```
 
 ---
 
-## [WORK 30] Zero-Knowledge Constraint System Exploit Generator
-- **Select Program:** Circom / Halo2 / Plonky2 Circuits
-- **Asset & Impact:** `circuit.r1cs` — Under-Constrained Signal in Merkle Proof Inclusion
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 30] مولد ثغرات نظام قيود المعرفة الصفرية (ZK)
+- **اسم البرنامج المقترح:** Circom / Halo2 / Plonky2 Circuits
+- **العقد والأثر:** `circuit.r1cs` — إشارة غير مقيدة في إثبات شجرة ميركل.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  The Merkle tree inclusion circuit omits range constraints on path index bits, allowing malicious provers to supply non-binary indices (`2` or `3`) to forge membership proofs.
+  ### الوصف (Description)
+  تتخطى دائرة تضمين شجرة ميركل قيود النطاق على بتات فهرس المسار، مما يسمح للمثبتين الخبيثين بتوفير فهارس غير ثنائية لتزوير إثباتات العضوية.
 
-  ### Mitigation / Recommendation
-  Add boolean enforcement constraints (`bit * (1 - bit) === 0`) for all path index signals.
+  ### الحل المقترح (Mitigation)
+  إضافة قيود فرض المنطق الثنائي (`bit * (1 - bit) === 0`) لجميع إشارات فهرس المسار.
   ```
 
 ---
 
-## [WORK 31] Formal Verification Engine for Bridge Invariants
-- **Select Program:** Across Protocol / Hop Protocol
-- **Asset & Impact:** `MessageHub.sol` — Unchecked Relayer Payout Accounting
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 31] محرك التحقق الرسمي لثوابت الجسور
+- **اسم البرنامج المقترح:** Across Protocol / Hop Protocol
+- **العقد والأثر:** `MessageHub.sol` — محاسبة دفعات ترحيل غير مراجعة.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Formal verification (Certora/SMTChecker) proved that relayer reward claims can be executed multiple times if the refund flag is cleared after transfer instead of before.
+  ### الوصف (Description)
+  أثبت التحقق الرسمي أنه يمكن تنفيذ مطالبات مكافآت المرحل عدة مرات إذا تم مسح علامة الاسترداد بعد النقل بدلاً من قبله.
 
-  ### Mitigation / Recommendation
-  Apply Checks-Effects-Interactions: set `refundClaimed[msg.sender] = true` prior to executing native token transfers.
+  ### الحل المقترح (Mitigation)
+  تطبيق نموذج (Checks-Effects-Interactions): تعيين `refundClaimed[msg.sender] = true` قبل تنفيذ عمليات نقل العملات الأصلية.
   ```
 
 ---
 
-## [WORK 32] EVM Gas Optimization & Calldata Decompression Analyzer
-- **Select Program:** Optimism / Arbitrum One Batch Ingestors
-- **Asset & Impact:** `BatchInbox.sol` — Unbounded Calldata Memory Expansion DoS
-- **Severity:** High
-- **Main Report:**
+## [العمل 32] محلل تحسين غاز EVM وفك ضغط البيانات
+- **اسم البرنامج المقترح:** Optimism / Arbitrum One Batch Ingestors
+- **العقد والأثر:** `BatchInbox.sol` — هجوم حرمان من الخدمة لتوسيع الذاكرة بلا حدود.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Batch submission contract performs unchecked calldata copying into memory without gas metering per chunk, causing out-of-gas errors for valid rollup checkpoints.
+  ### الوصف (Description)
+  يقوم عقد تقديم الدُفعات بنسخ البيانات إلى الذاكرة دون قياس غاز لكل قطعة، مما يتسبب في أخطاء نفاد الغاز لنقاط تفتيش Rollup الصالحة.
 
-  ### Mitigation / Recommendation
-  Process calldata in fixed-size chunks using streaming memory pointers.
+  ### الحل المقترح (Mitigation)
+  معالجة بيانات الاتصال في أجزاء ذات حجم ثابت باستخدام مؤشرات ذاكرة دفقية.
   ```
 
 ---
 
-## [WORK 33] Multi-Chain Oracle & TWAP Manipulation Simulator
-- **Select Program:** Chainlink Data Feeds / Pyth Network
-- **Asset & Impact:** `OracleConsumer.sol` — Stale Price Feed Acceptance Without Timestamp Check
-- **Severity:** High
-- **Main Report:**
+## [العمل 33] محاكي الأوراكل متعدد السلاسل والتلاعب بـ TWAP
+- **اسم البرنامج المقترح:** Chainlink Data Feeds / Pyth Network
+- **العقد والأثر:** `OracleConsumer.sol` — قبول أسعار قديمة دون فحص الطابع الزمني.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Oracle consumer contract reads `latestRoundData()` without verifying `updatedAt` timestamp against current `block.timestamp`, accepting frozen prices during sequencer outages.
+  ### الوصف (Description)
+  يقرأ عقد المستهلك الأوراكل الطابع الزمني `updatedAt` دون التحقق منه مقابل `block.timestamp` الحالي، مما يقبل الأسعار المجمدة أثناء انقطاع التسلسل.
 
-  ### Mitigation / Recommendation
-  Enforce maximum staleness threshold: `require(block.timestamp - updatedAt <= HEARTBEAT_INTERVAL, "Stale price");`
+  ### الحل المقترح (Mitigation)
+  فرض حد أقصى للقدم: `require(block.timestamp - updatedAt <= HEARTBEAT_INTERVAL, "Stale price");`
   ```
 
 ---
 
-## [WORK 34] L2 Rollup Dispute Game State Transition Fuzzer
-- **Select Program:** Arbitrum Nitro / Optimism Bedrock Fraud Proofs
-- **Asset & Impact:** `RollupCore.sol` — Invalid Bisection Assertion Handling
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 34] فاحص انتقال حالة النزاعات في L2 Rollup
+- **اسم البرنامج المقترح:** Arbitrum Nitro / Optimism Bedrock Fraud Proofs
+- **العقد والأثر:** `RollupCore.sol` — معالجة تأكيد التنصيف غير الصالحة.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  The dispute game bisection protocol fails to slash bond when a validator asserts an out-of-bounds execution trace step, allowing griefing attacks on dispute resolution times.
+  ### الوصف (Description)
+  يفشل بروتوكول تنصيف لعبة النزاع في مصادرة الضمان عندما يؤكد المدقق خطوة تتبع تنفيذ خارج الحدود، مما يسمح بهجمات إزعاج على أوقات حل النزاعات.
 
-  ### Mitigation / Recommendation
-  Implement automatic bond forfeiture upon invalid challenge submission.
+  ### الحل المقترح (Mitigation)
+  تنفيذ مصادرة آلية للضمان عند تقديم تحدٍ غير صالح.
   ```
 
 ---
 
-## [WORK 35] Cross-Chain Messaging & Relayer Replay Vulnerability Scanner
-- **Select Program:** LayerZero V2 / Chainlink CCIP
-- **Asset & Impact:** `CrossChainRelayerReceiver.sol` — Unchecked Source Chain Selector
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 35] فاحص ثغرات إعادة تشغيل رسائل الجسور والترحيل
+- **اسم البرنامج المقترح:** LayerZero V2 / Chainlink CCIP
+- **العقد والأثر:** `CrossChainRelayerReceiver.sol` — محدد سلسلة المصدر غير المراجع.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  The cross-chain receiver contract validates message payloads without checking the originating chain selector ID, permitting message spoofing from testnet L2s to drain mainnet vault liquidity.
+  ### الوصف (Description)
+  يتحقق عقد المستقبل عبر السلسلة من حمولات الرسائل دون التحقق من معرف سلسلة المصدر، مما يسمح بتزوير الرسائل من L2s التجريبية لاستنزاف سيولة خزينة الشبكة الرئيسية.
 
-  ### Mitigation / Recommendation
-  Require explicit mapping check: `require(supportedChains[sourceChainSelector], "Unauthorized chain");`
+  ### الحل المقترح (Mitigation)
+  طلب فحص صريح للمصفوفة: `require(supportedChains[sourceChainSelector], "Unauthorized chain");`
   ```
 
 ---
 
-## [WORK 37] MEV Sandwich Bot & DEX Liquidity Simulator
-- **Select Program:** Uniswap V3 / Curve Finance
-- **Asset & Impact:** `Router.sol` — Missing Slippage Protection on Multihop Swaps
-- **Severity:** Medium
-- **Main Report:**
+## [العمل 37] محاكي بوتات الشطيرة MEV وسيولة DEX
+- **اسم البرنامج المقترح:** Uniswap V3 / Curve Finance
+- **العقد والأثر:** `Router.sol` — نقص حماية الانزلاق على عمليات المقايضة متعددة القفزات.
+- **مستوى الخطورة:** متوسط (Medium)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Multihop swap routing function calculates minimum output amounts using static spot prices instead of pool reserves at execution time, enabling profitable sandwich attacks.
+  ### الوصف (Description)
+  تحسب وظيفة توجيه المقايضة الحد الأدنى للمخرجات باستخدام الأسعار الفورية الثابتة بدلاً من احتياطيات التجمع وقت التنفيذ، مما يتيح هجمات شطيرة مربحة.
 
-  ### Mitigation / Recommendation
-  Require users to pass explicit `amountOutMin` parameters calculated off-chain with strict tolerance limits.
+  ### الحل المقترح (Mitigation)
+  إلزام المستخدمين بتمرير معلمات `amountOutMin` صريحة محسوبة خارج السلسلة بحدود تسامح صارمة.
   ```
 
 ---
 
-## [WORK 38] Cross-Chain Arbitrage & Liquidity Dislocation Detector
-- **Select Program:** Stargate / Synapse Protocol
-- **Asset & Impact:** `LiquidityPool.sol` — Unbalanced Pool Fee Draining via Flash Swaps
-- **Severity:** High
-- **Main Report:**
+## [العمل 38] كاشف المراجحة عبر السلاسل واختلال السيولة
+- **اسم البرنامج المقترح:** Stargate / Synapse Protocol
+- **العقد والأثر:** `LiquidityPool.sol` — استنزاف رسوم التجمع الديناميكي عبر القروض السريعة.
+- **مستوى الخطورة:** عالي (High)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Dynamic fee calculation mechanism in cross-chain liquidity pool fails to account for intra-block flash loan imbalances, allowing arbitrageurs to drain pool reward reserves.
+  ### الوصف (Description)
+  تفشل آلية حساب الرسوم الديناميكية في مجمع السيولة عبر السلاسل في مراعاة اختلالات القرض السريع داخل الكتلة، مما يسمح للمراجحين باستنزاف احتياطيات المكافآت.
 
-  ### Mitigation / Recommendation
-  Incorporate TWAP-based imbalance ratio into dynamic fee computation.
+  ### الحل المقترح (Mitigation)
+  دمج نسبة الاختلال المستندة إلى TWAP في حساب الرسوم الديناميكية.
   ```
 
 ---
 
-## [WORK 40] Zero-Day Threat Intelligence & Protocol Health Monitor
-- **Select Program:** EigenLayer / Restaking Infrastructure
-- **Asset & Impact:** `DelegationManager.sol` — Forced Withdrawal Queue Stalling
-- **Severity:** Critical
-- **Main Report:**
+## [العمل 40] مراقب صحة البروتوكول واستخبارات التهديدات للصفر يوم
+- **اسم البرنامج المقترح:** EigenLayer / Restaking Infrastructure
+- **العقد والأثر:** `DelegationManager.sol` — توقف طابور السحب القسري.
+- **مستوى الخطورة:** حرج (Critical)
+- **تقرير الثغرة الرئيسي:**
   ```text
-  ### Description
-  Delegation manager contract allows malicious operators to grief stakers by appending empty withdrawal requests that lock the queue processing pointer indefinitely.
+  ### الوصف (Description)
+  يسمح عقد مدير التفويض للمشغلين الخبيثين بإزعاج أصحاب المصلحة عن طريق إلحاق طلبات سحب فارغة تقفل مؤشر معالجة الطابور إلى أجل غير مسمى.
 
-  ### Mitigation / Recommendation
-  Implement queue pagination and skip-invalid-index mechanisms for pending withdrawals.
+  ### الحل المقترح (Mitigation)
+  تنفيذ ترقيم صفحات الطابور وآليات تخطي الفهرس غير الصالح لعمليات السحب المعلقة.
   ```

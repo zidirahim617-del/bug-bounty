@@ -1,312 +1,312 @@
-# 🛡️ SHERLOCK CONTEST SUBMISSION MASTER FILE (Works 1 to 20)
-*Copy and paste these pre-formatted findings directly into Sherlock Audit Contest submission forms.*
-*GitHub Portfolio: `https://github.com/zidirahim617-del/security_portfolio`*
+# 🛡️ ملف التقديم الرئيسي لمسابقات SHERLOCK (الأعمال من 1 إلى 20)
+*انسخ هذه النتائج والصقها مباشرة في نماذج تقديم المسابقات على موقع Sherlock.*
+*رابط مستودع غيتهاب العام للمراجعة: `https://github.com/zidirahim617-del/security_portfolio`*
 
 ---
 
-## [CONTEST WORK 01] ERC-4626 Vault First Deposit Share Inflation Attack
-- **Contest / Target:** Tokenized Vault Invariants & Solvency Audit
-- **Finding Title:** First Deposit Share Inflation via Direct Asset Donation to Vault
-- **Severity:** Critical
-- **Description & PoC:**
+## [عمل مسابقة 01] هجمة تضخم حصص الخزينة في ERC-4626 (First Deposit Inflation)
+- **المسابقة / الهدف:** تدقيق ثوابت الخزينة وملاءتها (Tokenized Vault Invariants)
+- **عنوان الثغرة (Finding Title):** تضخم حصص الإيداع الأول عبر التبرع المباشر للأصول للخزينة
+- **مستوى الخطورة:** حرج (Critical)
+- **الوصف وإثبات الاستغلال (Description & PoC):**
   ```text
-  ### Vulnerability Details
-  An attacker can front-run the first vault depositor by depositing 1 wei of assets and donating 10^18 assets directly to the vault address, inflating `totalSupply()` disproportionately and stealing subsequent depositor funds due to integer truncation in `convertToShares`.
+  ### تفاصيل الثغرة
+  يمكن للمهاجم استباق أول مودع في الخزينة بإيداع 1 wei من الأصول والتبرع بـ 10^18 من الأصول مباشرة لعنوان الخزينة، مما يؤدي إلى تضخم `totalSupply()` بشكل غير متناسب وسرقة أموال المودعين اللاحقين بسبب التقريب في الحسابات.
 
-  ### Proof of Concept
+  ### إثبات الاستغلال (PoC)
   function testShareInflation() public {
       vault.deposit(1, attacker);
       token.transfer(address(vault), 1e18);
-      // Victim depositing 2e18 gets 0 shares due to rounding down
+      // الضحية الذي يودع 2e18 يحصل على 0 حصة بسبب التقريب للأسفل
       vault.deposit(2e18, victim);
       assertEq(vault.balanceOf(victim), 0);
   }
 
-  ### Recommended Mitigation
-  Virtual shares offset (ERC4626Upgradeable offset or virtual assets/shares addition) should be implemented.
+  ### الحل المقترح
+  يجب تطبيق إزاحة الحصص الافتراضية (Virtual Shares Offset).
   ```
 
 ---
 
-## [CONTEST WORK 02] TWAP Oracle Manipulation via Single-Block Flash Loan
-- **Contest / Target:** Lending & Borrowing Protocol Contest
-- **Finding Title:** Flash Loan Liquidity Injection Alters Cumulative Price TWAP
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 02] التلاعب بـ TWAP Oracle عبر قرض سريع لكتلة واحدة
+- **المسابقة / الهدف:** مسابقة بروتوكول الإقراض والاقتراض
+- **عنوان الثغرة:** حقن سيولة القرض السريع يغير سعر TWAP التراكمي
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The oracle queries `observe()` over a short TWAP window without checking observation cardinality updates, allowing an attacker to skew spot prices via flash-loaned pool imbalances within the same block.
+  ### تفاصيل الثغرة
+  يستعلم الأوراكل عن `observe()` خلال نافذة TWAP قصيرة دون التحقق من تحديثات الملاحظات، مما يسمح للمهاجم بتحريف الأسعار الفورية عبر اختلالات التجمع الممولة بالقروض السريعة.
 
-  ### Recommended Mitigation
-  Enforce minimum observation cardinality and increase TWAP window duration to at least 30 minutes.
+  ### الحل المقترح
+  فرض الحد الأدنى لتحديث الملاحظات وزيادة مدة نافذة TWAP إلى 30 دقيقة على الأقل.
   ```
 
 ---
 
-## [CONTEST WORK 03] Reentrancy in Liquidation Callback Handler
-- **Contest / Target:** Liquidator & Collateral Auction Protocol
-- **Finding Title:** Reentrancy Vulnerability in `liquidate()` Callback Execution
-- **Severity:** Critical
-- **Description & PoC:**
+## [عمل مسابقة 03] إعادة الدخول (Reentrancy) في معالج مكالمة التصفية
+- **المسابقة / الهدف:** بروتوكول المصفي ومزادات الضمان
+- **عنوان الثغرة:** ثغرة إعادة الدخول في تنفيذ مكالمة `liquidate()`
+- **مستوى الخطورة:** حرج (Critical)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The liquidation function transfers seized collateral before updating borrower debt state and clearing health factor flags, allowing reentrant calls into `borrow()` during the asset transfer hook.
+  ### تفاصيل الثغرة
+  تنقل وظيفة التصفية الضمان المحجوز قبل تحديث حالة ديون المقترض ومسح علامات عامل الصحة، مما يسمح بمكالمات إعادة دخول إلى `borrow()` أثناء خطاف نقل الأصول.
 
-  ### Recommended Mitigation
-  Apply Checks-Effects-Interactions pattern and update all internal accounting states prior to external asset transfers.
+  ### الحل المقترح
+  تطبيق نموذج (Checks-Effects-Interactions) وتحديث جميع حالات المحاسبة الداخلية قبل عمليات النقل الخارجي.
   ```
 
 ---
 
-## [CONTEST WORK 04] Unchecked Return Value in ERC-20 SafeTransfer Calls
-- **Contest / Target:** Multi-Token Yield Aggregator
-- **Finding Title:** Non-Standard ERC-20 Tokens Returning False Without Reverting Cause Accounting Desync
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 04] تجاهل قيمة الإرجاع في عمليات ERC-20 SafeTransfer
+- **المسابقة / الهدف:** مجمع العوائد متعدد العملات
+- **عنوان الثغرة:** رموز ERC-20 غير القياسية التي تعيد `false` دون التراجع تسبب تلف المحاسبة
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Using standard `transfer` / `transferFrom` instead of OpenZeppelin `SafeERC20` wrapper on non-standard tokens (e.g., USDT) that return `false` instead of reverting leads to silent balance desynchronization.
+  ### تفاصيل الثغرة
+  استخدام `transfer` القياسية بدلاً من غلاف OpenZeppelin `SafeERC20` على الرموز غير القياسية (مثل USDT) التي تعيد `false` بدل التراجع يؤدي إلى عدم مزامنة الأرصدة بصمت.
 
-  ### Recommended Mitigation
-  Wrap all token transfers using OpenZeppelin `SafeERC20` (`safeTransfer`, `safeTransferFrom`).
+  ### الحل المقترح
+  تغليف جميع عمليات نقل الرموز باستخدام `SafeERC20` (`safeTransfer`, `safeTransferFrom`).
   ```
 
 ---
 
-## [CONTEST WORK 05] Access Control Bypass in Emergency Pause Admin Function
-- **Contest / Target:** Decentralized Exchange Core
-- **Finding Title:** Missing Modifier on Emergency Pause Function Allows Unauthorized State Freeze
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 05] تجاوز التحكم في الوصول في وظيفة الإيقاف الطارئ
+- **المسابقة / الهدف:** نواة بورصة اللامركزية (DEX Core)
+- **عنوان الثغرة:** نقص المُعدل على وظيفة الإيقاف الطارئ يتيح تجميد الحالة بدون إذن
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The `emergencyPause()` function lacks the `onlyOwner` or `onlyGuardian` modifier, enabling any external account to freeze protocol swaps and staking pools indefinitely.
+  ### تفاصيل الثغرة
+  تفتقر وظيفة `emergencyPause()` إلى مُعدل `onlyOwner` أو `onlyGuardian`، مما يتيح لأي حساب خارجي تجميد مقايضات البروتوكول وتجمعات الرهن إلى أجل غير مسمى.
 
-  ### Recommended Mitigation
-  Add `onlyRole(DEFAULT_ADMIN_ROLE)` modifier to all administrative pause hooks.
+  ### الحل المقترح
+  إضافة مُعدل `onlyRole(DEFAULT_ADMIN_ROLE)` لجميع وظائف التوقف الإدارية.
   ```
 
 ---
 
-## [CONTEST WORK 06] Integer Precision Loss in Reward Rate Distribution
-- **Contest / Target:** Staking & Liquidity Mining Rewards Contract
-- **Finding Title:** Precision Loss in Reward Per Token Calculation Under High Scale Factors
-- **Severity:** Medium
-- **Description & PoC:**
+## [عمل مسابقة 06] فقدان دقة الأعداد الصحيحة في توزيع معدل المكافآت
+- **المسابقة / الهدف:** عقد مكافآت التعدين والسيولة
+- **عنوان الثغرة:** فقدان الدقة في حساب المكافأة لكل رمز تحت عوامل مقياس عالية
+- **مستوى الخطورة:** متوسط (Medium)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Calculating `rewardPerTokenStored = rewardPerTokenStored + (rewardRate * dt * 1e18) / totalSupply` causes truncation to zero when `rewardRate * dt` is small relative to `totalSupply`.
+  ### تفاصيل الثغرة
+  يؤدي حساب `rewardPerTokenStored = rewardPerTokenStored + (rewardRate * dt * 1e18) / totalSupply` إلى التقريب للصفر عندما تكون `rewardRate * dt` صغيرة مقارنة بـ `totalSupply`.
 
-  ### Recommended Mitigation
-  Scale reward accumulation factors to `1e36` or use fixed-point arithmetic libraries.
+  ### الحل المقترح
+  قياس عوامل تراكم المكافآت إلى `1e36` أو استخدام مكتبات الحساب الثابت.
   ```
 
 ---
 
-## [CONTEST WORK 07] Stale Oracle Price Acceptance in Liquidator Bot
-- **Contest / Target:** Margin Trading & Perpetual Exchange
-- **Finding Title:** Liquidations Executed Using Stale Chainlink Price Feeds During Network Congestion
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 07] قبول أسعار الأوراكل القديمة في بوت التصفية
+- **المسابقة / الهدف:** منصة الهامش والتداول الدائم
+- **عنوان الثغرة:** تنفيذ التصفيات باستخدام أسعار Chainlink القديمة أثناء ازدحام الشبكة
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Health factor checks rely solely on `latestAnswer()` without validating `updatedAt` timestamp, allowing liquidators to liquidate solvent positions during oracle update lags.
+  ### تفاصيل الثغرة
+  تعتمد فוחصات عامل الصحة فقط على `latestAnswer()` دون التحقق من الطابع الزمني `updatedAt`، مما يسمح بتصفية الحسابات الملاءة أثناء تأخير تحديث الأوراكل.
 
-  ### Recommended Mitigation
-  Validate `block.timestamp - updatedAt <= maxStaleness`.
+  ### الحل المقترح
+  التحقق من أن `block.timestamp - updatedAt <= maxStaleness`.
   ```
 
 ---
 
-## [CONTEST WORK 08] Flash Mint Fee Evasion via Direct Token Donation
-- **Contest / Target:** ERC-3039 Flash Minting Protocol
-- **Finding Title:** Flash Mint Fee Calculation Bypass via Pre-Funded Repayment
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 08] تهرب رسوم السك السريع (Flash Mint) عبر التبرع المباشر
+- **المسابقة / الهدف:** بروتوكول السك السريع ERC-3039
+- **عنوان الثغرة:** تجاوز حساب رسوم السك السريع عبر السداد المسبق الممول
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Flash mint fee computation checks `token.balanceOf(address(this)) - initialBalance >= expectedRepayment`, which can be bypassed if the flash borrower pre-donates assets before invocation.
+  ### تفاصيل الثغرة
+  يتحقق حساب رسوم السك السريع من `token.balanceOf(address(this)) - initialBalance >= expectedRepayment`، وهو ما يمكن تجاوزه إذا قام المقترض بالتبرع بالأصول مسبقاً.
 
-  ### Recommended Mitigation
-  Calculate fee based on explicit parameter validation rather than raw balance deltas.
+  ### الحل المقترح
+  حساب الرسوم بناءً على التحقق من معلمات صريحة بدلاً من فروق الأرصدة الخام.
   ```
 
 ---
 
-## [CONTEST WORK 09] DelegateCall Injection in Upgradeable Proxy Admin
-- **Contest / Target:** Transparent Upgradeable Proxy Architecture
-- **Finding Title:** Arbitrary DelegateCall Execution via Fallback Function in Proxy Implementation
-- **Severity:** Critical
-- **Description & PoC:**
+## [عمل مسابقة 09] حقن DelegateCall في وكيل قابل للترقية (Upgradeable Proxy)
+- **المسابقة / الهدف:** بنية الوكيل الشفاف القابل للترقية
+- **عنوان الثغرة:** تنفيذ DelegateCall تعسفي عبر وظيفة الfallback في عقد الوكيل
+- **مستوى الخطورة:** حرج (Critical)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The proxy fallback routine forwards calldata via `delegatecall` without properly restricting admin selectors, enabling storage collision and state corruption.
+  ### تفاصيل الثغرة
+  يقوم روتين الfallback الخاص بالوكيل بإعادة توجيه البيانات عبر `delegatecall` دون تقييد محددات المشرف بشكل صحيح، مما يتيح تداخل التخزين وتلف الحالة.
 
-  ### Recommended Mitigation
-  Enforce strict proxy admin separation (Transparent Proxy Pattern).
+  ### الحل المقترح
+  فرض فصل صارم لمشرف الوكيل (نمط الوكيل الشفاف).
   ```
 
 ---
 
-## [CONTEST WORK 10] Signature Replay Vulnerability in Permit Signatures
-- **Contest / Target:** EIP-2612 Permit Token Vault
-- **Finding Title:** Missing Nonce Increment in Custom Permit Implementation Allows Signature Replay
-- **Severity:** Critical
-- **Description & PoC:**
+## [عمل مسابقة 10] ثغرة إعادة تشغيل التوقيعات (Signature Replay) في Permit
+- **المسابقة / الهدف:** خزينة الرموز EIP-2612 Permit
+- **عنوان الثغرة:** غياب زيارة العداد (Nonce) في تطبيق Permit المخصص يتيح إعادة تشغيل التوقيع
+- **مستوى الخطورة:** حرج (Critical)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The custom `permit()` function validates signatures against user nonces but fails to increment `nonces[owner]` after successful execution, allowing an attacker to replay the permit signature indefinitely.
+  ### تفاصيل الثغرة
+  تتحقق وظيفة `permit()` المخصصة من التوقيعات مقابل عدادات المستخدمين ولكنها تفشل في زيارة `nonces[owner]` بعد التنفيذ الناجح، مما يسمح لإعادة تشغيل التوقيع بلا حدود.
 
-  ### Recommended Mitigation
-  Increment nonce immediately upon signature verification: `nonces[owner]++`.
+  ### الحل المقترح
+  زيادة العداد فوراً عند التحقق من التوقيع: `nonces[owner]++`.
   ```
 
 ---
 
-## [CONTEST WORK 11] Unbounded Loop Gas Exhaustion in Batch Claims
-- **Contest / Target:** Airdrop & Merkle Distributor Contract
-- **Finding Title:** Denial of Service via Unbounded Array Iteration in `batchClaim()`
-- **Severity:** Medium
-- **Description & PoC:**
+## [عمل مسابقة 11] استنفاد الغاز بسبب حلقة بلا حدود في المطالبات المجمعة
+- **المسابقة / الهدف:** عقد توزيع الرموز و Merkle Distributor
+- **عنوان الثغرة:** رفض الخدمة عبر التكرار غير المحدود في `batchClaim()`
+- **مستوى الخطورة:** متوسط (Medium)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The `batchClaim()` function iterates over an unconstrained array of user proofs, causing transaction execution to exceed block gas limit when batch size exceeds 150 items.
+  ### تفاصيل الثغرة
+  تكرر وظيفة `batchClaim()` مصفوفة غير مقيدة من إثباتات المستخدمين، مما يتسبب في تجاوز حد غاز الكتلة عند زيادة حجم الدفعة عن 150 عنصراً.
 
-  ### Recommended Mitigation
-  Implement pagination or require off-chain Merkle proof batching with fixed chunk sizes.
+  ### الحل المقترح
+  تنفيذ الترقيم أو طلب دُفعات إثبات Merkle خارج السلسلة بحجم أجزاء ثابت.
   ```
 
 ---
 
-## [CONTEST WORK 12] Slippage Parameter Omission in Vault Deposit Routing
-- **Contest / Target:** Yield Optimizer Strategy Vault
-- **Finding Title:** Zero Slippage Protection in Curve/Uniswap LP Deposit Routing
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 12] إغفال معلمة الانزلاق في توجيه إيداع الخزينة
+- **المسابقة / الهدف:** خزينة تحسين العوائد (Yield Optimizer)
+- **عنوان الثغرة:** حماية انزلاق صفري في توجيه إيداع Curve/Uniswap LP
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Vault strategy deposits user funds into external AMM pools using `minAmountOut = 0`, exposing vault depositors to front-running and MEV sandwich attacks.
+  ### تفاصيل الثغرة
+  تودع استراتيجية الخزينة أموال المستخدمين في تجمعات AMM الخارجية باستخدام `minAmountOut = 0`، مما يعرض مودعي الخزينة لهجمات الأمام (Front-running) والشطيرة (MEV).
 
-  ### Recommended Mitigation
-  Require minimum output parameters on all strategy deposit and withdrawal routes.
+  ### الحل المقترح
+  طلب الحد الأدنى من معلمات الإخراج على جميع مسارات إيداع وسحب الاستراتيجية.
   ```
 
 ---
 
-## [CONTEST WORK 13] Front-Running Vulnerability in Initializing Owner
-- **Contest / Target:** Factory & Multi-Tenant Deployment Contract
-- **Finding Title:** Front-Running Initialization Function in Uninitialized Factory Clones
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 13] هجمة الأمام في تهيئة المالك (Initializing Owner)
+- **المسابقة / الهدف:** عقد المصنع والنشر متعدد المستأجرين
+- **عنوان الثغرة:** هجمة الأمام على وظيفة التهيئة في نسخ المصنع غير المهيأة
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Clone deployment contracts separate deployment from initialization without locking the `initialize()` function via `initializer` modifier during deployment constructor.
+  ### تفاصيل الثغرة
+  تفصل عقود نشر النسخ عن التهيئة دون قفل وظيفة `initialize()` عبر مُعدل `initializer` أثناء نشر الكونستركتور.
 
-  ### Recommended Mitigation
-  Execute initialization atomically inside the clone creation factory transaction.
+  ### الحل المقترح
+  تنفيذ التهيئة بشكل ذري داخل معاملة إنشاء مصنع النسخ.
   ```
 
 ---
 
-## [CONTEST WORK 14] Incorrect Scaling Factor in Fixed-Point Math Conversion
-- **Contest / Target:** Perpetual Futures Margin Engine
-- **Finding Title:** Margin Ratio Calculation Error Due to Decimal Mismatch (18 vs 6 decimals)
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 14] عامل قياس خاطئ في تحويل الحساب الرياضي الثابت
+- **المسابقة / الهدف:** محرك هامش العقود الآجلة الدائمة
+- **عنوان الثغرة:** خطأ حساب نسبة الهامش بسبب عدم تطابق العشريات (18 مقابل 6 عشريات)
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  USDC collateral (6 decimals) is multiplied by 1e18 scaling factor without normalizing debt asset decimals, causing massive underestimation of required margin requirements.
+  ### تفاصيل الثغرة
+  يتم ضرب ضمان USDC (6 عشريات) بعامل مقياس 1e18 دون تطبيع عشريات أصل الدين، مما يتسبب في تقليل هائل لمتطلبات الهامش المطلوبة.
 
-  ### Recommended Mitigation
-  Normalize all asset amounts to a standard 18 decimal precision before performing margin arithmetic.
+  ### الحل المقترح
+  تطبيع جميع مبالغ الأصول إلى دقة قياسية من 18 عشرياً قبل إجراء العمليات الحسابية للهامش.
   ```
 
 ---
 
-## [CONTEST WORK 15] Timestamp Dependency in Timelock Expiration Check
-- **Contest / Target:** DAO Governance Voting & Execution
-- **Finding Title:** Miner Manipulation of `block.timestamp` in Timelock Expiry Window
-- **Severity:** Medium
-- **Description & PoC:**
+## [عمل مسابقة 15] الاعتماد على الطابع الزمني في فحص انتهاء القفل الزمني
+- **المسابقة / الهدف:** تصويت وتنفيذ حوكمة DAO
+- **عنوان الثغرة:** تلاعب المعدنين بـ `block.timestamp` في نافذة انتهاء القفل الزمني
+- **مستوى الخطورة:** متوسط (Medium)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Proposal expiration relies strictly on `block.timestamp`, allowing miners to manipulate block timestamps within acceptable drift bounds (15 seconds) to execute expired proposals.
+  ### تفاصيل الثغرة
+  يعتمد انتهاء صلاحية المقترح بصرامة على `block.timestamp`، مما يتيح للمعدنين التلاعب بالطوابع الزمنية ضمن حدود الانحراف المقبولة (15 ثانية) لتنفيذ المقترحات المنتهية.
 
-  ### Recommended Mitigation
-  Use block numbers for short-term thresholds or allow broader tolerance buffers for timestamp checks.
+  ### الحل المقترح
+  استخدام أرقام الكتل للعتبات قصيرة الأجل أو السماح بنطاقات تحمل أوسع للفحوصات الزمنية.
   ```
 
 ---
 
-## [CONTEST WORK 16] Unprotected Selfdestruct in Legacy Migration Contract
-- **Contest / Target:** Token Migration Bridge Contract
-- **Finding Title:** Unrestricted `selfdestruct` Opcode Access in Migration Module
-- **Severity:** Critical
-- **Description & PoC:**
+## [عمل مسابقة 16] تدمير ذاتي غير محمي في عقد هجرة قديم
+- **المسابقة / الهدف:** عقد جسر هجرة الرموز
+- **عنوان الثغرة:** وصول غير مقيد لـ `selfdestruct` في وحدة الهجرة
+- **مستوى الخطورة:** حرج (Critical)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  The migration helper contract retains an unauthenticated `selfdestruct(msg.sender)` function that can destroy the contract and misappropriate locked ETH balances.
+  ### تفاصيل الثغرة
+  يحتفظ عقد مساعد الهجرة بوظيفة `selfdestruct(msg.sender)` غير مصادق عليها والتي يمكنها تدمير العقد والاستيلاء على أرصدة ETH المقفلة.
 
-  ### Recommended Mitigation
-  Remove `selfdestruct` entirely or restrict access strictly to multi-sig governance owner.
+  ### الحل المقترح
+  إزالة `selfdestruct` تماماً أو تقييد الوصول حصرياً لمالك الحوكمة المتعدد التوقيعات (Multi-sig).
   ```
 
 ---
 
-## [CONTEST WORK 17] Precision Loss in Proportional Fee Deduction
-- **Contest / Target:** Automated Market Maker Fee Splitter
-- **Finding Title:** Fee Truncation to Zero on Small Transfer Amounts Due to Integer Division Order
-- **Severity:** Medium
-- **Description & PoC:**
+## [عمل مسابقة 17] فقدان الدقة في خصم الرسوم النسبية
+- **المسابقة / الهدف:** مقسم رسوم صانع السوق الآلي (AMM)
+- **عنوان الثغرة:** تقريب الرسوم إلى الصفر على مبالغ التحويل الصغيرة بسبب ترتيب القسمة الصحيحة
+- **مستوى الخطورة:** متوسط (Medium)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Fee calculation `amount * feeBps / 10000` truncates fee to zero when `amount * feeBps < 10000`, allowing zero-fee transfers for small amounts.
+  ### تفاصيل الثغرة
+  يحسب خصم الرسوم `amount * feeBps / 10000` بتقريب الرسم إلى الصفر عندما تكون `amount * feeBps < 10000`، مما يسمح بتحويلات مجانية للمبالغ الصغيرة.
 
-  ### Recommended Mitigation
-  Perform multiplication before division and ensure minimum fee rounding rules.
+  ### الحل المقترح
+  إجراء الضرب قبل القسمة وضمان قواعد تقريب الحد الأدنى للرسوم.
   ```
 
 ---
 
-## [CONTEST WORK 18] Hash Collision in Nonce-Based Order Matching
-- **Contest / Target:** Off-Chain Orderbook Settlement Contract
-- **Finding Title:** Order Nonce Collision Across Multiple Trading Pairs
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 18] تصادم التجزئة (Hash Collision) في مطابقة الطلبات بالعداد
+- **المسابقة / الهدف:** عقد تسوية دفتر الطلبات خارج السلسلة
+- **عنوان الثغرة:** تصادم عداد الطلبات عبر أزواج التداول المتعددة
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Order hashes are computed using `keccak256(abi.encodePacked(trader, nonce))` without including market pair address, allowing replay of signed orders across different trading pairs.
+  ### تفاصيل الثغرة
+  يتم حساب تجزئة الطلبات باستخدام `keccak256(abi.encodePacked(trader, nonce))` دون تضمين عنوان زوج السوق، مما يسمح بإعادة تشغيل الطلبات الموقع عليها عبر أزواج تداول مختلفة.
 
-  ### Recommended Mitigation
-  Include `marketId` or `address(this)` in the order hash digest.
+  ### الحل المقترح
+  تضمين `marketId` أو `address(this)` في تجزئة الطلب.
   ```
 
 ---
 
-## [CONTEST WORK 19] Denial of Service via Reverting Receiver Hook (`ERC-1155`)
-- **Contest / Target:** NFT Marketplace & Escrow Contract
-- **Finding Title:** Marketplace Auction Escrow Lockup via Reverting `onERC1155Received`
-- **Severity:** High
-- **Description & PoC:**
+## [عمل مسابقة 19] رفض الخدمة عبر خطاف استقبال متراجع (ERC-1155)
+- **المسابقة / الهدف:** سوق NFT وعقد الضمان (Escrow)
+- **عنوان الثغرة:** قفل ضمان مزاد السوق عبر استجابة `onERC1155Received` المتراجعة
+- **مستوى الخطورة:** عالي (High)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Batch payout iteration reverts the entire transaction if any recipient's `onERC1155Received` callback reverts, allowing malicious bidders to grief auctions and prevent refunds.
+  ### تفاصيل الثغرة
+  تتراجع حلقة الدفع الجماعي عن المعاملة بأكملها إذا تراجع خطاف `onERC1155Received` لأي مستلم، مما يتيح للمزايدين الخبيثين إزعاج المزادات ومنع الاسترداد.
 
-  ### Recommended Mitigation
-  Implement pull-over-push payment patterns for all batch distributions.
+  ### الحل المقترح
+  تنفيذ أنماط السحب بدلاً من الدفع (Pull-over-push) لجميع التوزيعات الجماعية.
   ```
 
 ---
 
-## [CONTEST WORK 20] Missing Event Emission on Critical State Mutation
-- **Contest / Target:** Vault Fee Parameter Update Contract
-- **Finding Title:** Lack of Event Logging on Protocol Fee Rate Updates
-- **Severity:** Low
-- **Description & PoC:**
+## [عمل مسابقة 20] غياب إصدار الحدث (Event) عند تعديل الحالة الحرجة
+- **المسابقة / الهدف:** عقد تحديث معلمة رسوم الخزينة
+- **عنوان الثغرة:** نقص تسجيل الأحداث عند تحديث معدلات رسوم البروتوكول
+- **مستوى الخطورة:** منخفض (Low)
+- **الوصف وإثبات الاستغلال:**
   ```text
-  ### Vulnerability Details
-  Changing protocol fee parameters via `setFeeRate()` updates storage state without emitting corresponding events, breaking off-chain indexer tracking and transparency.
+  ### تفاصيل الثغرة
+  يؤدي تغيير معلمات رسوم البروتوكول عبر `setFeeRate()` إلى تحديث حالة التخزين دون إصدار الأحداث المقابلة، مما يكسر تتبع الفهرس خارج السلسلة والشفافية.
 
-  ### Recommended Mitigation
-  Emit `FeeRateUpdated(oldRate, newRate)` on all administrative setter functions.
+  ### الحل المقترح
+  إصدار الحدث `FeeRateUpdated(oldRate, newRate)` على جميع وظائف التعديل الإدارية.
   ```
