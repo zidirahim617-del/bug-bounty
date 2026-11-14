@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-11-14T17:10:16.250385Z",
+  "target_monthly_yield": "$20,000 USD",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "prs_dispatched_count": 5,
+  "prs_dispatched": [
+    {
+      "target_repo": "GoHybrid/router-contracts",
+      "pr_title": "Fix: Enforce strict slippage bounds and reentrancy guard on GoHybridRouter",
+      "status": "PR_OPENED_AND_REVIEWING",
+      "est_bounty": "$2,500",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c"
+    },
+    {
+      "target_repo": "Kitewell/escrow-vaults",
+      "pr_title": "Fix: ERC-4626 first deposit share inflation virtual offset patch",
+      "status": "PR_OPENED_AND_REVIEWING",
+      "est_bounty": "$3,000",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c"
+    },
+    {
+      "target_repo": "MergeMint/settlement-engine",
+      "pr_title": "Fix: Reentrancy guard in liquidation callback before debt update",
+      "status": "PR_OPENED_AND_REVIEWING",
+      "est_bounty": "$2,000",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c"
+    },
+    {
+      "target_repo": "Algora-Bounty/rust-overflow-guard",
+      "pr_title": "Fix: Checked math in reward accumulator loop to prevent overflow",
+      "status": "PR_MERGE_PENDING",
+      "est_bounty": "$1,500",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c"
+    },
+    {
+      "target_repo": "Stellar/soroban-token-safety",
+      "pr_title": "Fix: Soroban Wasm host memory allocation limit check for batch transfers",
+      "status": "GRANT_PROPOSAL_DISPATCHED",
+      "est_bounty": "$5,000",
+      "wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c"
+    }
+  ],
+  "projected_monthly_payout": "$14,000 - $22,000 USD",
+  "status": "AUTONOMOUS_PR_ENGINE_ACTIVE"
+}
