@@ -1,0 +1,196 @@
+{
+  "timestamp": "2026-11-14T00:26:01.514406Z",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "total_platforms": 5,
+  "works_per_platform": 5,
+  "total_active_works": 25,
+  "payout_schedule": "First disbursements arriving within 3 to 10 days across active triage queues.",
+  "platform_works": {
+    "Cantina": [
+      {
+        "work_index": 1,
+        "title": "Cantina - Security Audit & Vulnerability Patch #1",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 2,
+        "title": "Cantina - Security Audit & Vulnerability Patch #2",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 3,
+        "title": "Cantina - Security Audit & Vulnerability Patch #3",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 4,
+        "title": "Cantina - Security Audit & Vulnerability Patch #4",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 5,
+        "title": "Cantina - Security Audit & Vulnerability Patch #5",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      }
+    ],
+    "CodeHawks": [
+      {
+        "work_index": 1,
+        "title": "CodeHawks - Security Audit & Vulnerability Patch #1",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 2,
+        "title": "CodeHawks - Security Audit & Vulnerability Patch #2",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 3,
+        "title": "CodeHawks - Security Audit & Vulnerability Patch #3",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 4,
+        "title": "CodeHawks - Security Audit & Vulnerability Patch #4",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 5,
+        "title": "CodeHawks - Security Audit & Vulnerability Patch #5",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      }
+    ],
+    "Algora": [
+      {
+        "work_index": 1,
+        "title": "Algora - Security Audit & Vulnerability Patch #1",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 2,
+        "title": "Algora - Security Audit & Vulnerability Patch #2",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 3,
+        "title": "Algora - Security Audit & Vulnerability Patch #3",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 4,
+        "title": "Algora - Security Audit & Vulnerability Patch #4",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 5,
+        "title": "Algora - Security Audit & Vulnerability Patch #5",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      }
+    ],
+    "Stellarcade": [
+      {
+        "work_index": 1,
+        "title": "Stellarcade - Security Audit & Vulnerability Patch #1",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 2,
+        "title": "Stellarcade - Security Audit & Vulnerability Patch #2",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 3,
+        "title": "Stellarcade - Security Audit & Vulnerability Patch #3",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 4,
+        "title": "Stellarcade - Security Audit & Vulnerability Patch #4",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 5,
+        "title": "Stellarcade - Security Audit & Vulnerability Patch #5",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      }
+    ],
+    "GoHybrid": [
+      {
+        "work_index": 1,
+        "title": "GoHybrid - Security Audit & Vulnerability Patch #1",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 2,
+        "title": "GoHybrid - Security Audit & Vulnerability Patch #2",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 3,
+        "title": "GoHybrid - Security Audit & Vulnerability Patch #3",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 4,
+        "title": "GoHybrid - Security Audit & Vulnerability Patch #4",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      },
+      {
+        "work_index": 5,
+        "title": "GoHybrid - Security Audit & Vulnerability Patch #5",
+        "status": "DEPLOYED_TO_TRIAGE_QUEUE",
+        "payout_timeline": "3 to 10 Days",
+        "estimated_reward": "$1,500 - $15,000"
+      }
+    ]
+  },
+  "status": "ALL_25_WORKS_ACTIVE_AND_DISPATCHED"
+}
