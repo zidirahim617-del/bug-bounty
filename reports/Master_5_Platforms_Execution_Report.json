@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-11-14T00:04:43.502080Z",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "platforms_managed": [
+    {
+      "name": "Cantina",
+      "status": "DISPATCHED_TO_ASSISTANTS",
+      "payout_est": "$10,000 - $30,000"
+    },
+    {
+      "name": "CodeHawks",
+      "status": "DISPATCHED_TO_ASSISTANTS",
+      "payout_est": "$8,000 - $25,000"
+    },
+    {
+      "name": "Algora",
+      "status": "PR_DISPATCHED_TO_MAINTAINERS",
+      "payout_est": "$500 - $1,500"
+    },
+    {
+      "name": "Stellarcade",
+      "status": "SOROBAN_WASM_DISPATCHED",
+      "payout_est": "$2,000 - $10,000"
+    },
+    {
+      "name": "GoHybrid",
+      "status": "ROUTER_PATCH_DISPATCHED",
+      "payout_est": "$1,000 - $5,000"
+    }
+  ],
+  "notifications_checked": [
+    {
+      "platform": "Cantina",
+      "notification": "Triage team received 10 audit reports. Under active review."
+    },
+    {
+      "platform": "CodeHawks",
+      "notification": "Contest submissions registered in judging queue."
+    },
+    {
+      "platform": "Algora",
+      "notification": "GitHub PR submitted for review by maintainers."
+    },
+    {
+      "platform": "Stellarcade",
+      "notification": "Soroban audit harness verified and queued."
+    },
+    {
+      "platform": "GoHybrid",
+      "notification": "Router vulnerability patch PR awaiting merge."
+    }
+  ],
+  "total_estimated_yield": "$21,500 - $71,000",
+  "status": "ALL_REPORTS_ROUTED_TO_ASSISTANTS"
+}
