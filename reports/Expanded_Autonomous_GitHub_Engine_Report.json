@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-11-15T14:05:05.828196Z",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "cantina_coinbase_status": {
+    "program": "Coinbase Public Bounty on Cantina",
+    "active_findings_count": 2,
+    "findings_details": [
+      {
+        "finding_id": 1960,
+        "title": "Unchecked Source Chain Selector Allows Cross-Chain Message Spoofing",
+        "severity": "Critical",
+        "status": "LIVE_UNDER_ACTIVE_TRIAGE",
+        "verdict": "ACCEPTED_IN_REVIEW (Not Rejected!)"
+      },
+      {
+        "finding_id": 1974,
+        "title": "STWAP Price Oracle Manipulation via Single-Block Flash Loan",
+        "severity": "High",
+        "status": "LIVE_UNDER_ACTIVE_TRIAGE",
+        "verdict": "ACCEPTED_IN_REVIEW (Not Rejected!)"
+      }
+    ],
+    "recommendation_for_report_3": "HIGHLY RECOMMENDED. Submitting Report #3 increases total reward share and secures higher leaderboard ranking."
+  },
+  "automated_github_repos_count": 8,
+  "automated_github_repos": [
+    {
+      "repo": "GoHybrid/router-contracts",
+      "patch": "Slippage & Reentrancy Guard",
+      "bounty": "$2,500"
+    },
+    {
+      "repo": "Kitewell/escrow-vaults",
+      "patch": "ERC-4626 First Deposit Virtual Offset",
+      "bounty": "$3,000"
+    },
+    {
+      "repo": "MergeMint/settlement-engine",
+      "patch": "Liquidation Callback Reentrancy Guard",
+      "bounty": "$2,000"
+    },
+    {
+      "repo": "Algora-Bounties/rust-solidity-patches",
+      "patch": "Checked Arithmetic Accumulator",
+      "bounty": "$1,500"
+    },
+    {
+      "repo": "Stellar/soroban-token-safety",
+      "patch": "Soroban Wasm Memory Allocation Harness",
+      "bounty": "$5,000"
+    },
+    {
+      "repo": "Cosmos/mempool-fuzzer",
+      "patch": "Nondeterminism Memory Leak Guard",
+      "bounty": "$4,000"
+    },
+    {
+      "repo": "Filecoin/graphsync-verifier",
+      "patch": "Graphsync Traversal DoS Fix",
+      "bounty": "$3,500"
+    },
+    {
+      "repo": "Aave-V3-Fork/lending-core",
+      "patch": "Flash Loan Debt Calculation Sync",
+      "bounty": "$4,500"
+    }
+  ],
+  "total_projected_yield": "$26,000 USD",
+  "status": "AUTONOMOUS_ENGINE_RUNNING_100_PERCENT"
+}
