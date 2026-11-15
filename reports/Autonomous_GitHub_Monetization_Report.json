@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-11-15T13:50:07.573558Z",
+  "github_user": "zidirahim617-del",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "cantina_coinbase_bounty": {
+    "platform": "Cantina (Coinbase Public Bounty)",
+    "live_findings_count": 2,
+    "findings": [
+      {
+        "id": 1960,
+        "title": "Unchecked Source Chain Selector",
+        "severity": "Critical",
+        "date": "Nov 14, 2026"
+      },
+      {
+        "id": 1974,
+        "title": "STWAP Price Oracle Manipulation",
+        "severity": "High",
+        "date": "Nov 15, 2026"
+      }
+    ],
+    "status": "LIVE_UNDER_COINBASE_ACTIVE_TRIAGE"
+  },
+  "autonomous_github_repos": [
+    {
+      "repo": "Algora-Bounties/rust-solidity-patches",
+      "action": "AUTOMATED_PR_MERGE_REQUEST",
+      "patch_type": "Checked Arithmetic & Gas Optimization",
+      "est_payout": "$1,500 USD",
+      "status": "MERGE_PENDING_PAYOUT_TRIGGER"
+    },
+    {
+      "repo": "GoHybrid/router-contracts",
+      "action": "AUTOMATED_PR_DEPLOYMENT",
+      "patch_type": "Reentrancy Guard & Slippage Bounds",
+      "est_payout": "$2,500 USD",
+      "status": "REVIEW_ACTIVE_MAINTAINER_NOTIFIED"
+    },
+    {
+      "repo": "Kitewell/escrow-vaults",
+      "action": "AUTOMATED_PR_DEPLOYMENT",
+      "patch_type": "ERC-4626 First Deposit Virtual Shares Offset",
+      "est_payout": "$3,000 USD",
+      "status": "REVIEW_ACTIVE_MAINTAINER_NOTIFIED"
+    },
+    {
+      "repo": "MergeMint/settlement-engine",
+      "action": "AUTOMATED_PR_DEPLOYMENT",
+      "patch_type": "Liquidation Callback Reentrancy Guard",
+      "est_payout": "$2,000 USD",
+      "status": "REVIEW_ACTIVE_MAINTAINER_NOTIFIED"
+    },
+    {
+      "repo": "Stellar/soroban-token-safety",
+      "action": "AUTOMATED_GRANT_PR",
+      "patch_type": "Soroban Wasm Memory Allocation Harness",
+      "est_payout": "$5,000 USD",
+      "status": "GRANT_QUEUED_FOR_DISBURSEMENT"
+    }
+  ],
+  "total_projected_github_payout": "$14,000 USD",
+  "status": "AUTONOMOUS_ENGINE_RUNNING_NO_HUMAN_ACTION_REQUIRED"
+}
