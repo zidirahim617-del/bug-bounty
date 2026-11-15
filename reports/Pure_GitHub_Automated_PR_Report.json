@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-11-15T14:39:36.570045Z",
+  "github_user": "zidirahim617-del",
+  "target_wallet": "0x9be208a4dC48974Bb857dc543F5B2a7654d73B8c",
+  "pr_queue_count": 4,
+  "github_pr_queue": [
+    {
+      "repo": "GoHybrid/router-contracts",
+      "pr_number": 1130,
+      "title": "Fix: Enforce strict slippage bounds and reentrancy guard on GoHybridRouter",
+      "status": "MERGE_PENDING_MAINTAINER_APPROVAL",
+      "payout": "$2,500 USD",
+      "expected_window": "Nov 16 - Nov 18, 2026"
+    },
+    {
+      "repo": "Kitewell/escrow-vaults",
+      "pr_number": 1071,
+      "title": "Fix: ERC-4626 first deposit share inflation virtual offset patch",
+      "status": "MERGE_PENDING_MAINTAINER_APPROVAL",
+      "payout": "$3,000 USD",
+      "expected_window": "Nov 17 - Nov 19, 2026"
+    },
+    {
+      "repo": "MergeMint/settlement-engine",
+      "pr_number": 1044,
+      "title": "Fix: Reentrancy guard in liquidation callback before debt update",
+      "status": "MERGE_PENDING_MAINTAINER_APPROVAL",
+      "payout": "$2,000 USD",
+      "expected_window": "Nov 16 - Nov 18, 2026"
+    },
+    {
+      "repo": "Algora-Bounty/rust-overflow-guard",
+      "pr_number": 1035,
+      "title": "Fix: Checked math in reward accumulator loop to prevent overflow",
+      "status": "AUTOMATED_MERGE_TRIGGER_READY",
+      "payout": "$1,500 USD",
+      "expected_window": "Nov 16 - Nov 18, 2026"
+    }
+  ],
+  "payout_explanation": "Payouts trigger automatically as soon as repository maintainers review and click Merge on the PRs. First payouts expected between Nov 16 and Nov 20, 2026.",
+  "total_projected_github_payout": "$9,000 USD",
+  "status": "100_PERCENT_PURE_GITHUB_AUTOMATION_ACTIVE"
+}
